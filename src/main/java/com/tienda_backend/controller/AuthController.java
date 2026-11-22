@@ -4,6 +4,8 @@ import com.tienda_backend.model.User;
 import com.tienda_backend.repository.UserRepository;
 import com.tienda_backend.security.JwtUtil;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -29,7 +31,13 @@ public class AuthController {
 
     @PostMapping("/register")
     @Operation(summary = "Registrar nuevo usuario")
-    public ResponseEntity<?> register(@RequestBody Map<String, String> body) {
+    public ResponseEntity<?> register(
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    content = @Content(examples = @ExampleObject(
+                            value = "{\"name\": \"Jugador Prueba\", \"email\": \"jugador.swagger@duocuc.cl\", \"password\": \"gamer123\"}"
+                    ))
+            )
+            @RequestBody Map<String, String> body) {
         String name = body.get("name");
         String email = body.get("email").toLowerCase();
         String password = body.get("password");
@@ -54,7 +62,13 @@ public class AuthController {
 
     @PostMapping("/login")
     @Operation(summary = "Iniciar sesión")
-    public ResponseEntity<?> login(@RequestBody Map<String, String> body) {
+    public ResponseEntity<?> login(
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    content = @Content(examples = @ExampleObject(
+                            value = "{\"email\": \"admin@duocuc.cl\", \"password\": \"admin123\"}"
+                    ))
+            )
+            @RequestBody Map<String, String> body) {
         String email = body.get("email").toLowerCase();
         String password = body.get("password");
 

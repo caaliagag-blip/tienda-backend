@@ -6,6 +6,8 @@ import com.tienda_backend.model.Product;
 import com.tienda_backend.repository.OrderRepository;
 import com.tienda_backend.repository.ProductRepository;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -31,7 +33,14 @@ public class OrderController {
     @PostMapping
     @SuppressWarnings("unchecked")
     @Operation(summary = "Crear y confirmar una orden de compra")
-    public ResponseEntity<Order> createOrder(@RequestBody Map<String, Object> body, Authentication authentication) {
+    public ResponseEntity<Order> createOrder(
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    content = @Content(examples = @ExampleObject(
+                            value = "{\"customerEmail\": \"gamer@duocuc.cl\", \"paymentMethod\": \"Webpay Crédito\", \"items\": [{\"productCode\": \"CO001\", \"quantity\": 1}]}"
+                    ))
+            )
+            @RequestBody Map<String, Object> body,
+            Authentication authentication) {
         Order order = new Order();
 
         String email = (authentication != null && authentication.getName() != null)

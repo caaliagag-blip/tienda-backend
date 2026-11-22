@@ -1,5 +1,6 @@
 package com.tienda_backend.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 @Entity
@@ -8,18 +9,23 @@ public class Product {
 
     @Id
     @Column(length = 20)
+    @Schema(example = "SW001")
     private String code;
 
     @Column(nullable = false)
+    @Schema(example = "Consolas")
     private String category;
 
     @Column(nullable = false)
+    @Schema(example = "Nintendo Switch OLED")
     private String name;
 
     @Column(nullable = false)
+    @Schema(example = "349990")
     private Integer price;
 
     @Column(name = "description", length = 500)
+    @Schema(example = "Consola híbrida con pantalla OLED de 7 pulgadas y 64 GB de almacenamiento.")
     private String desc;
 
     public Product() {}
