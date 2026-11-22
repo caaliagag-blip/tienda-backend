@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/products")
 @Tag(name = "Productos", description = "Operaciones CRUD del catálogo Level-Up Gamer")
-public class ProductController {
+public class    ProductController {
 
     private final ProductRepository productRepository;
 
